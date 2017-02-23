@@ -1,1 +1,18 @@
-# discrete-event-simulation
+# Discrete Event Simulation
+
+Implementieren Sie in C++-Programm, das diskrete Prozesse simulieren kann. Ein Prozess ist diskret, wenn sich nur zu endlichen vielen Zeitpunkten der Systemzustand ändern kann. Als Methode soll die diskrete Ereignissimulation eingesetzt werden. Bei dieser Methode wird nicht in Realzeit simuliert, es werden nur jene Zeitpunkte betrachtet, zu denen Änderungen am System eintreten. Die Zeit zwi- schen diesen Ereignissen kann vernachlässigt werden. Das kann die benötigte Simulationszeit dras- tisch reduzieren, da nur interessante Zeitpunkte betrachtet werden. Herzstück eines solchen Simula- tors ist daher eine Liste mit noch ausstehenden Ereignissen, die in der Zukunft passieren werden. Da jederzeit neue Ereignisse hinzukommen können und die Anzahl der Ereignisse mitunter sehr beacht- lich ausfallen kann, ist die Wahl einer geeigneten Datenstruktur essenziell. Hier bietet sich die C++- Standardbibliothek mit ihrer großen Anzahl an sehr effizient implementierten Datenstrukturen an.
+
+a) Recherchieren Sie mögliche Designansätze und passende Datenstrukturen für diese Aufgabenstel- lung und implementieren Sie eine möglichst allgemein einsetzbare Simulationsbibliothek in Form von C++-Klassen. Folgende Funktionalität muss mindestens verfügbar sein:
+
+  Zukünftige Ereignisse müssen für einen bestimmten Zeitpunkt geplant werden können und in einer effizienten Datenstruktur gehalten werden.
+  Ereignisse müssen andere Ereignisse (in derselben Simulation) erzeugen können. Überlegen Sie hier, welche API Sie verwenden, um diesen Aspekt, der in der Praxis häufig gebraucht wird, möglichst komfortabel gestalten zu können.
+  Das System muss verschiedene Arten von Ereignissen unterstützen. Es soll einfach möglich sein, neue Ereignistypen hinzuzufügen.
+  Die Simulation muss schrittweise ausgeführt werden können. Es muss also beispielsweise eine Methode step() geben, die einfach nur das nächste Ereignis abarbeitet.
+  Die Simulation muss bis zu einem bestimmten Kriterium ausgeführt werden können, nach- dem sie entweder pausiert oder stoppt. Es muss also beispielsweise eine Methode run() geben, die durch Ereignisse in der Simulation beendet werden kann.
+  
+b) Demonstrieren Sie die korrekte Funktionsweise Ihrer Bibliothek anhand von folgendem Test-Sze- nario : Ein Produzent erzeugt Produkte, z. B. einfach ganze Zahlen, die in einem Puffer abgelegt werden. Falls der Puffer voll ist, muss der Produzent warten. Zusätzlich gibt es einen Konsumen- ten, der die erzeugten Produkte im Puffer wieder verbraucht. Falls der Puffer leer ist, muss der Konsument warten. Dabei soll die Zeit, die Produzent und Konsument für ihre Arbeit brauchen nicht konstant sein, sondern zufällig schwanken. Außerdem gibt es einen Supervisor, der die Si- mulation beendet, wenn entweder mehr als eine bestimmte Anzahl von Produkten erzeugt wurden oder mehr als eine bestimmte Anzahl von Zeitschritten vergangen sind.
+     
+Das Design des Simulators ist völlig Ihnen überlassen. im Folgenden finden Sie einige Hinweise, die dazu dienen sollen, Ihnen das Leben zu erleichtern:
+  Die STL-Datenstruktur priority_queue ist möglicherweise gut geeignet für die zentrale Ereigniswarteschlange.
+  Der Einsatz von Funktoren, Lambda-Ausdrücken oder Funktionszeigern bietet einen elegan- ten Weg, um vorher nicht bekannte Funktionalität zu kapseln. Alternativ dazu könnte auch eine eigne abstrakte Klasse mit einer bestimmten Schnittstelle dienen, die dann allerdings vorausgesetzt werden müsste.
+  Das Design der API hat möglicherweise weitreichende Auswirkungen auf das Test-Szena- rio. Spielen Sie einige Möglichkeiten im Test-Szenario durch, bevor Sie mit der Implemen- tierung beginnen.
